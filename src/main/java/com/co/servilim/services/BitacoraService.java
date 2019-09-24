@@ -29,8 +29,9 @@ public class BitacoraService {
 		return bitacora;
 	}
 		
-	public void saveBitacora(ArrayList<Bitacora> bitacora) {
-		bitacora.forEach(b->{bitacoraRepository.save(b);});	
+	public Boolean saveBitacora(List<Bitacora> mapa) {
+		mapa.forEach(b->{bitacoraRepository.save(b);});
+		return Boolean.TRUE;
 	}
 	
 	public void saveBitacora(Map<String, List<Bitacora>> mapa) {
@@ -38,8 +39,8 @@ public class BitacoraService {
 		bitacora.forEach(b->{bitacoraRepository.save(b);});	
 	}
 	
-	public void saveBitacora(Bitacora bitacora) {
-		bitacoraRepository.save(bitacora);
+	public Bitacora saveBitacora(Bitacora bitacora) {
+		return bitacoraRepository.save(bitacora);
 	}
 	
 	public Iterable<Bitacora> findAll() {

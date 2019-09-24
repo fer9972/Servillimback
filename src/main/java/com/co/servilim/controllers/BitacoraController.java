@@ -1,11 +1,15 @@
 package com.co.servilim.controllers;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.ServletContextListener;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.co.servilim.entities.Bitacora;
 import com.co.servilim.services.BitacoraService;
@@ -24,9 +29,10 @@ public class BitacoraController {
 	private BitacoraService bitacoraService;
 	
 	@PostMapping("bitacora")
-	public String saveBitacora(@RequestBody Bitacora bitacora) {
-		bitacoraService.saveBitacora(bitacora);
-		return "";
+	public ResponseEntity<Object> saveBitacora(@RequestBody Bitacora bitacora) {
+		Bitacora bit = bitacoraService.saveBitacora(bitacora);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{/id}").buildAndExpand(bit.getId()).toUri();
+		return ResponseEntity.created(uri).body(bit);
 	}
 	
 	@PostMapping("bitacora/list")
@@ -35,10 +41,12 @@ public class BitacoraController {
 		bitacoraService.saveBitacora(bitacora);
 		return "";
 	}
+	
 	@PostMapping("bitacora/map")
-	public String saveBitacora(@RequestBody Map< String, List<Bitacora>> mapa) {
-		bitacoraService.saveBitacora(mapa);
-		return "";
+	public ResponseEntity<Object> saveBitacora(@RequestBody List<Bitacora> mapa) {
+		Boolean bool = bitacoraService.saveBitacora(mapa);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("").build().toUri();
+		return ResponseEntity.created(uri).body(mapa);
 	}
 	
 	@DeleteMapping("bitacora/{id}")
