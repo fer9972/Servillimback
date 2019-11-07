@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -24,7 +25,7 @@ public class Bitacora implements Serializable {
 	private String serial;
 	
 	private Long id_usuario;
-
+	
 	public Bitacora(Long id, Date date, String comentario, String serial, Long id_usuario) {
 		super();
 		this.id = id;

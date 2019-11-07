@@ -52,7 +52,7 @@ public class BitacoraController {
 	@DeleteMapping("bitacora/{id}")
 	public String deleteBitacora(/*@RequestBody Bitacora bitacora*/) {
 		
-		return "Yo soy Sebas";
+		return "--";
 	}
 	
 	@PutMapping("bitacora")
@@ -67,6 +67,7 @@ public class BitacoraController {
 		return bitacoraService.getBitacora(id);
 	}
 	
+
 	@GetMapping("bitacora")
 	public Iterable<Bitacora> getBitacora() {
 		return bitacoraService.findAll();
